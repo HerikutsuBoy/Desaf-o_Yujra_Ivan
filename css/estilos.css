@@ -1,0 +1,407 @@
+/* =========================================================
+   Alexander Coffee — estilos.css
+   Maquetación fluida y semántica.
+   Sin Flexbox, sin Grid, sin @media, sin JavaScript.
+   Técnica de columnas: display: table / table-cell e inline-block.
+   ========================================================= */
+
+*,
+*::before,
+*::after {
+  box-sizing: border-box;
+}
+
+:root {
+  --marron-oscuro: #2E1D12;
+  --marron-cafe: #6B4226;
+  --tostado: #B8834D;
+  --crema: #F2E8D5;
+  --verde-madidi: #4A5D3A;
+  --blanco-calido: #FBF7F0;
+
+  --fuente-titular: Georgia, "Palatino Linotype", "Book Antiqua", serif;
+  --fuente-texto: "Trebuchet MS", Verdana, Arial, sans-serif;
+
+  --ancho-contenido: min(72rem, 94vw);
+  --espacio-seccion: clamp(1.75rem, 1.1rem + 3vw, 4rem);
+}
+
+html {
+  -webkit-text-size-adjust: 100%;
+}
+
+body {
+  margin: 0;
+  background-color: var(--crema);
+  color: var(--marron-oscuro);
+  font-family: var(--fuente-texto);
+  font-size: clamp(0.95rem, 0.88rem + 0.3vw, 1.08rem);
+  line-height: 1.6;
+}
+
+h1, h2, h3 {
+  font-family: var(--fuente-titular);
+  color: var(--marron-oscuro);
+  line-height: 1.15;
+  margin-top: 0;
+}
+
+h1 { font-size: clamp(1.8rem, 1.2rem + 2.6vw, 2.9rem); margin: 0; }
+h2 { font-size: clamp(1.45rem, 1.1rem + 1.6vw, 2.15rem); margin-bottom: 0.9em; }
+h3 { font-size: clamp(1.1rem, 0.95rem + 0.8vw, 1.4rem); margin-bottom: 0.5em; }
+
+p { max-width: 68ch; }
+
+a {
+  color: var(--marron-cafe);
+}
+
+a:focus-visible,
+summary:focus-visible {
+  outline: 3px solid var(--verde-madidi);
+  outline-offset: 2px;
+}
+
+.saltar-enlace {
+  position: absolute;
+  left: -999px;
+  top: auto;
+  background: var(--blanco-calido);
+  padding: 0.6em 1em;
+  z-index: 10;
+}
+.saltar-enlace:focus {
+  left: clamp(0.5rem, 2vw, 1rem);
+  top: clamp(0.5rem, 2vw, 1rem);
+}
+
+/* ---------------------------------------------------------
+   Cabecera: técnica de dos columnas con display:table
+   --------------------------------------------------------- */
+.cabecera {
+  display: table;
+  width: 100%;
+  border-bottom: 3px double var(--marron-cafe);
+  background-color: var(--blanco-calido);
+  padding: clamp(0.75rem, 0.5rem + 1vw, 1.25rem) 0;
+}
+
+.cabecera .marca,
+.cabecera nav {
+  display: table-cell;
+  vertical-align: middle;
+  padding-left: clamp(1rem, 3vw, 3rem);
+  padding-right: clamp(1rem, 3vw, 3rem);
+}
+
+.marca {
+  margin: 0;
+  width: 60%;
+}
+
+.marca p {
+  margin: 0.15em 0 0;
+  font-style: italic;
+  color: var(--marron-cafe);
+  font-size: clamp(0.8rem, 0.7rem + 0.4vw, 0.95rem);
+}
+
+.cabecera nav {
+  text-align: right;
+}
+
+.cabecera nav ul {
+  list-style: none;
+  margin: 0;
+  padding: 0;
+}
+
+.cabecera nav li {
+  display: inline-block;
+  margin-left: clamp(0.6rem, 1vw, 1.4rem);
+}
+
+.cabecera nav a {
+  text-decoration: none;
+  font-weight: bold;
+  color: var(--marron-oscuro);
+  border-bottom: 2px solid transparent;
+  padding-bottom: 2px;
+}
+
+.cabecera nav a:hover,
+.cabecera nav a:focus-visible {
+  border-bottom-color: var(--tostado);
+}
+
+/* ---------------------------------------------------------
+   Secciones generales
+   --------------------------------------------------------- */
+main > section,
+.pie {
+  width: var(--ancho-contenido);
+  margin-left: auto;
+  margin-right: auto;
+  padding-top: var(--espacio-seccion);
+  padding-bottom: var(--espacio-seccion);
+  border-bottom: 1px solid var(--tostado);
+}
+
+main > section:last-of-type {
+  border-bottom: none;
+}
+
+/* ---------------------------------------------------------
+   Hero / Inicio
+   --------------------------------------------------------- */
+.hero {
+  padding-top: clamp(2rem, 1.3rem + 3.5vw, 4.5rem);
+}
+
+.hero__lema {
+  font-style: italic;
+  color: var(--marron-cafe);
+  max-width: 60ch;
+  font-size: clamp(1rem, 0.9rem + 0.5vw, 1.2rem);
+}
+
+.stats {
+  margin: clamp(1.5rem, 1rem + 2vw, 2.5rem) 0 0;
+  padding: clamp(1rem, 0.8rem + 1vw, 1.5rem) 0;
+  border-top: 1px solid var(--tostado);
+}
+
+.stats__item {
+  display: inline-block;
+  vertical-align: top;
+  width: clamp(11rem, 22vw, 16rem);
+  margin: 0.6em 1.5em 0.6em 0;
+  padding-right: 1em;
+}
+.stats dt {
+  font-family: var(--fuente-titular);
+  font-weight: bold;
+  color: var(--verde-madidi);
+  font-size: 0.95em;
+}
+
+.stats dd {
+  margin: 0.2em 0 0;
+}
+
+/* ---------------------------------------------------------
+   Carta — details/summary y tablas
+   --------------------------------------------------------- */
+details {
+  background-color: var(--blanco-calido);
+  border: 1px solid var(--tostado);
+  padding: clamp(0.8rem, 0.6rem + 0.8vw, 1.2rem) clamp(1rem, 0.8rem + 1vw, 1.5rem);
+  margin-bottom: 1em;
+}
+
+summary {
+  cursor: pointer;
+  font-family: var(--fuente-titular);
+  font-weight: bold;
+  font-size: clamp(1rem, 0.95rem + 0.3vw, 1.15rem);
+  color: var(--marron-cafe);
+  list-style: none;
+}
+
+summary::-webkit-details-marker {
+  display: none;
+}
+
+summary::before {
+  content: "+ ";
+  color: var(--verde-madidi);
+  font-weight: bold;
+}
+
+details[open] summary::before {
+  content: "– ";
+}
+
+details[open] summary {
+  margin-bottom: 0.8em;
+  border-bottom: 1px solid var(--tostado);
+  padding-bottom: 0.6em;
+}
+
+table {
+  width: 100%;
+  border-collapse: collapse;
+  table-layout: fixed;
+  margin: 0.5em 0;
+}
+
+caption {
+  text-align: left;
+  font-style: italic;
+  color: var(--marron-cafe);
+  margin-bottom: 0.5em;
+  font-size: 0.9em;
+}
+
+th, td {
+  text-align: left;
+  padding: 0.5em 0.6em;
+  vertical-align: top;
+  word-break: break-word;
+  border-bottom: 1px solid var(--crema);
+  font-size: clamp(0.82rem, 0.78rem + 0.2vw, 0.95rem);
+}
+
+thead th {
+  border-bottom: 2px solid var(--marron-cafe);
+  color: var(--marron-oscuro);
+}
+
+tbody tr:nth-child(odd) {
+  background-color: var(--crema);
+}
+
+mark {
+  background-color: var(--tostado);
+  color: var(--blanco-calido);
+  padding: 0 0.2em;
+}
+
+abbr {
+  text-decoration: dotted underline;
+}
+
+/* ---------------------------------------------------------
+   Origen — línea de tiempo
+   --------------------------------------------------------- */
+.linea-tiempo {
+  padding-left: 1.2em;
+}
+
+.linea-tiempo li {
+  margin-bottom: 0.7em;
+}
+
+.linea-tiempo time {
+  font-weight: bold;
+  color: var(--verde-madidi);
+}
+
+/* ---------------------------------------------------------
+   Sucursales
+   --------------------------------------------------------- */
+.tabla-sucursales th[scope="row"] {
+  font-weight: bold;
+  color: var(--marron-cafe);
+}
+
+/* ---------------------------------------------------------
+   Tienda — cuadrícula fluida con inline-block
+   --------------------------------------------------------- */
+.tienda-grid {
+  list-style: none;
+  margin: 1.5em 0;
+  padding: 0;
+}
+
+.tienda-grid > li {
+  display: inline-block;
+  vertical-align: top;
+  width: clamp(15rem, 45%, 24rem);
+  margin: 0 2em 2em 0;
+}
+
+.tienda-grid article {
+  background-color: var(--blanco-calido);
+  border: 1px solid var(--tostado);
+  padding: clamp(1rem, 0.8rem + 1vw, 1.5rem);
+  height: 100%;
+}
+
+.tienda-grid .precio {
+  font-weight: bold;
+  color: var(--marron-cafe);
+}
+
+a.cta {
+  display: inline-block;
+  background-color: var(--verde-madidi);
+  color: var(--blanco-calido);
+  text-decoration: none;
+  padding: 0.55em 1.1em;
+  border: 1px solid var(--verde-madidi);
+  font-weight: bold;
+}
+
+a.cta:hover,
+a.cta:focus-visible {
+  background-color: var(--marron-cafe);
+  border-color: var(--marron-cafe);
+}
+
+/* ---------------------------------------------------------
+   Cultura
+   --------------------------------------------------------- */
+#cultura address {
+  font-style: normal;
+  background-color: var(--blanco-calido);
+  border-left: 4px solid var(--tostado);
+  padding: clamp(0.8rem, 0.6rem + 0.8vw, 1.2rem) clamp(1rem, 0.8rem + 1vw, 1.5rem);
+}
+
+/* ---------------------------------------------------------
+   Pie de página
+   --------------------------------------------------------- */
+.pie {
+  border-bottom: none;
+  border-top: 3px double var(--marron-cafe);
+  color: var(--marron-cafe);
+  font-size: 0.9em;
+  padding-top: clamp(1.25rem, 1rem + 1vw, 2rem);
+  padding-bottom: clamp(1.25rem, 1rem + 1vw, 2rem);
+}
+
+.pie address {
+  font-style: normal;
+  margin-bottom: 0.6em;
+}
+
+.pie a {
+  color: var(--marron-cafe);
+}
+/* ---------------------------------------------------------
+   Botón flotante de WhatsApp
+   --------------------------------------------------------- */
+.whatsapp-flotante {
+  position: fixed;
+  right: clamp(0.75rem, 2vw, 1.5rem);
+  bottom: clamp(0.75rem, 2vw, 1.5rem);
+  background-color: var(--verde-madidi);
+  color: var(--blanco-calido);
+  text-decoration: none;
+  padding: 0.6em 1em;
+  border-radius: 999px;
+  display: table;
+  box-shadow: 0 2px 6px rgba(46, 29, 18, 0.35);
+}
+
+.whatsapp-flotante svg {
+  display: table-cell;
+  width: 1.3em;
+  height: 1.3em;
+  fill: currentColor;
+  vertical-align: middle;
+}
+
+.whatsapp-flotante span {
+  display: table-cell;
+  vertical-align: middle;
+  padding-left: 0.4em;
+  font-weight: bold;
+  font-size: 0.9em;
+}
+
+.whatsapp-flotante:hover,
+.whatsapp-flotante:focus-visible {
+  background-color: var(--marron-cafe);
+}
